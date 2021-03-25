@@ -1,3 +1,6 @@
+# Workflow
+This project uses [GitHub flow](https://guides.github.com/introduction/flow/).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
