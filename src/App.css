@@ -1,0 +1,7 @@
+
+
+@media (max-width: 767px) {
+    .fill-sm {
+        min-width: 100% !important;
+    }
+}

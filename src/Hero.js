@@ -4,8 +4,8 @@ function Hero() {
 	return (
 		<Jumbotron id="Hero" fluid style={{ height: "50vh", display: "flex", alignItems: "center" }}>
 			<Container>
-				<Row className="justify-content-md-center">
-					<Col md={{ span: "auto" }}>
+				<Row className="justify-content-sm-center">
+					<Col sm={{ span: "auto" }}>
 						<h5 className="mb-0">Hello, i'm</h5>
 						<h1>Francesco Galisi</h1>
 						<p>
