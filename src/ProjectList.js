@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import { Col, Row, Card, Button } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 
 
 function ProjectList() {
-	let projects = [...Array(20).keys()];
-	const [maxItems, setMaxItems] = useState(3);
-	const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
 	const defaultItemsMobile = 3;
 	const defaultItemsDesktop = 6;
 	const itemsIncrement = 3;
+
+	let projects = [...Array(20).keys()];
+	const [maxItems, setMaxItems] = useState(Math.min(defaultItemsMobile, defaultItemsDesktop));
+	const isMobile = useMediaQuery({ query: '(max-width: 760px)' });
+
+	const isDisabled = maxItems >= projects.length;
+
+	const firstRender = useRef(true);
+	const seeMoreRef = createRef();
+	useEffect(() => {
+		if (firstRender.current) {
+			firstRender.current = false;
+			return;
+		}
+
+		seeMoreRef.current.scrollIntoView({behavior: "smooth"})
+	}, [maxItems]);
 
 	return (
 		<Row className="mb-3">
@@ -29,7 +43,7 @@ function ProjectList() {
 												the card's content.
 											</Card.Text>
 											<Card.Link href="#">Card Link</Card.Link>
-											<Card.Link href="#">Another Link</Card.Link>
+											<Card.Link className="text-secondary" href="#">Another Link</Card.Link>
 										</Card.Body>
 									</Card>
 								)
@@ -38,7 +52,7 @@ function ProjectList() {
 					</Col>
 				</Row>
 				<Row className="justify-content-center mx-auto">
-					<Button size="lg"
+					<Button id="btn-see-more" ref={seeMoreRef} size="lg"
 						onClick={() => {
 							setMaxItems(Math.min(
 								Math.max(maxItems, isMobile ? defaultItemsMobile : defaultItemsDesktop) + itemsIncrement, 
@@ -46,11 +60,10 @@ function ProjectList() {
 							))
 						}}						
 						block={isMobile}
-						variant={maxItems < projects.length ? "primary" : "secondary"} 
-						disabled={maxItems >= projects.length}
+						disabled={isDisabled}
 					>
 						See more
-					</Button>	
+					</Button>
 				</Row>
 			</Col>			
 		</Row>
