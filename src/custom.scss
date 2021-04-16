@@ -19,8 +19,8 @@ $solarized: (
 );
 
 $theme-colors: (
-	"primary":    map-get($solarized, "orange"),
-	"secondary":  map-get($solarized, "cyan"),
+	"primary":    map-get($solarized, "blue"),
+	"secondary":  map-get($solarized, "yellow"),
 	"success":    map-get($solarized, "green"),
 	"info":       map-get($solarized, "magenta"),
 	"warning":    map-get($solarized, "green"),
@@ -35,8 +35,8 @@ $jumbotron-color:	map-get($solarized, "base2");
 $body-bg:			map-get($solarized, "base03");
 $body-color:		map-get($solarized, "base3");
 
-$card-bg: 			map-get($solarized, "base3");
-$card-color: 		map-get($solarized, "base03");
+$card-bg: 			map-get($solarized, "base02");
+$card-color: 		map-get($solarized, "base2");
 
 // Import Bootstrap and its default variables
 @import "node_modules/bootstrap/scss/bootstrap";
