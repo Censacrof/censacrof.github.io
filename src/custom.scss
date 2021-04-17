@@ -37,6 +37,7 @@ $body-color:		map-get($solarized, "base3");
 
 $card-bg: 			map-get($solarized, "base02");
 $card-color: 		map-get($solarized, "base2");
+// $card-border-color: map-get($solarized, "base01");
 
 // Import Bootstrap and its default variables
 @import "node_modules/bootstrap/scss/bootstrap";
