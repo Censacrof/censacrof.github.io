@@ -17,7 +17,7 @@ module.exports = {
     fontFamily: {
       'sans': monda, // overwrite default font
       'monda': monda,
-      'barcode-text': ['\'Libre Barcode 39 Text\''], // for some reasons, I needed to add extra apices
+      'barcode-text': ['\'Libre Barcode 39 Text\'',  'cursive'], // for some reasons, I needed to add extra apices
     },
   },
   plugins: [],
