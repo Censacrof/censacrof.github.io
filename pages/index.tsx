@@ -1,52 +1,5 @@
-import { Monda } from '@next/font/google'
-import { useEffect, useState } from 'react'
-
-const monda = Monda({weight: '400'})
-
-const Header = () => {
-  return (
-    <div className="flex flex-col flex-wrap gap-4">
-      <div className='flex-grow flex flex-row justify-center items-center'>
-        <div className="bg-primary rounded-full h-[70px] w-[70px]"></div>
-      </div>
-      <div className="flex flex-col justify-center gap-2 items-center text-surface text-3xl ">
-        <h1 className='text-3xl'>Francesco Galisi</h1>
-        <p className='font-barcode-text'>Software Engineer</p>
-      </div>      
-    </div>
-  )
-}
-
-type PromptProps = {
-  text: string,
-}
-const Prompt: React.FC<PromptProps> = ({ text }) => {
-  const [currentText, setCurrentText] = useState('')
-  const [cursorVisible, setCursorVisible] = useState(true)
-
-  useEffect(() => {
-    const delay = Math.floor(Math.random() * 60 + 30)
-    
-    const timeout = setTimeout(() => {
-      setCurrentText(currentText => text.substring(0, currentText.length + 1))
-      setCursorVisible(true)
-    }, delay)
-    return () => clearTimeout(timeout)
-  }, [currentText])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCursorVisible(cursorVisible => !cursorVisible)
-    }, 500)
-    return () => clearInterval(interval)
-  }, [currentText])
-
-  return (
-    <div className="text-surface mt-10 gap-2">
-      <span className="font-bold">{'> '}</span>{currentText}{cursorVisible ? '_' : ''}
-    </div>
-  )
-}
+import Header from '../components/Header'
+import Prompt from '../components/Prompt'
 
 export default function Home() {
   return (
