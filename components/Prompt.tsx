@@ -25,7 +25,7 @@ const Prompt: React.FC<PromptProps> = ({ text }) => {
   }, [currentText])
 
   return (
-    <div className="text-surface mt-10 gap-2">
+    <div className="flex flex-row justify-start w-full text-surface mt-10 gap-2">
       <span className="font-bold">{'> '}</span>{currentText}{cursorVisible ? '_' : ''}
     </div>
   )
