@@ -8,7 +8,7 @@ module.exports = {
     extend: {},
     colors: {
       'background': '#101214',
-      'primary': '#101214',
+      'primary': '#426E78',
       'secondary': '#404040',
       'surface': '#f3f3e8',
     }
