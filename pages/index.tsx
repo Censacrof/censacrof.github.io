@@ -25,17 +25,26 @@ const Prompt: React.FC<PromptProps> = ({ text }) => {
   const [cursorVisible, setCursorVisible] = useState(false)
 
   useEffect(() => {
+    const delay = Math.floor(Math.random() * 100 + 10)
+
+    const timeout = setTimeout(() => {
+      setCurrentText(currentText => text.substring(0, currentText.length + 1))
+    }, delay)
+    return () => clearTimeout(timeout)
+  }, [currentText])
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setCursorVisible(cursorVisible => !cursorVisible)
     }, 500)
     return () => clearInterval(interval)
-  }, [])
+  }, [currentText])
 
   return (
     <div className="flex flex-row text-surface mt-10 gap-2">
       <div className='font-bold'>{'>'}</div>
       <div>
-        {text}{cursorVisible ? '_' : ''}
+        {currentText}{cursorVisible ? '_' : ''}
       </div>
     </div>
   )
