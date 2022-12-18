@@ -1,7 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { Monda } from '@next/font/google'
-import styles from '../styles/Home.module.css'
 
 const monda = Monda({weight: '400'})
 
