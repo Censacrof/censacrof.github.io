@@ -19,6 +19,7 @@ module.exports = {
       'sans': monda, // overwrite default font
       'monda': monda,
       'barcode-text': ['\'Libre Barcode 39 Text\'',  'cursive'], // for some reasons, I needed to add extra apices
+      'chivo-mono': ['Chivo Mono', 'monospace'],
     },
   },
   plugins: [],

@@ -118,7 +118,7 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
   const linesInA = qAndA.answer.substring(0, currentCharA).split('\n');
 
   return (
-    <div className="text-surface gap-2">
+    <div className="font-chivo-mono text-surface gap-2">
       <p><span className="font-bold">{active || state != QAndARendererState.idle ? '> ' : ''}</span><span className="text-primary-variant">{qAndA.question.substring(0, currentCharQ)}</span>{cursorVisible && state == QAndARendererState.doingQ ? '_' : ''}</p>
       {
         linesInA.map((answer, i) => (
