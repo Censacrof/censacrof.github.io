@@ -5,6 +5,7 @@ type QAndA = {question: string, answer: string}
 enum QAndARendererState {
   idle,
   doingQ,
+  pause,
   doingA,
   done,
 }
@@ -25,7 +26,11 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
     if (!active || state != QAndARendererState.idle)
       return
     
-    setState(QAndARendererState.doingQ)
+    const timeout = setTimeout(() => {
+      setState(QAndARendererState.doingQ)
+    }, 500)
+
+    return () => clearTimeout(timeout)
   })
 
   // doingQ
@@ -34,7 +39,7 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
       return
     
     if (currentCharQ >= qAndA.question.length) {
-      setState(QAndARendererState.doingA)
+      setState(QAndARendererState.pause)
       return
     }
 
@@ -44,6 +49,18 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
 
     return () => clearTimeout(timeOut)
   }, [state, currentCharQ])
+
+  // pause
+  useEffect(() => {
+    if (!active || state != QAndARendererState.pause)
+      return
+    
+    const timeout = setTimeout(() => {
+      setState(QAndARendererState.doingA)
+    }, 500)
+
+    return () => clearTimeout(timeout)
+  })
 
   // doingA
   useEffect(() => {
@@ -90,14 +107,8 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
 
   return (
     <div className="text-surface gap-2">
-      {
-        active ? (
-          <>
-            <p><span className="font-bold">{'> '}</span><span className="text-primary-variant">{qAndA.question.substring(0, currentCharQ)}</span>{cursorVisible && state == QAndARendererState.doingQ ? '_' : ''}</p>
-            <p>{qAndA.answer.substring(0, currentCharA)}{cursorVisible && state == QAndARendererState.doingA ? '_' : ''}</p>
-          </>
-        ) : <></>
-      }
+            <p><span className="font-bold">{state != QAndARendererState.idle ? '> ' : ''}</span><span className="text-primary-variant">{qAndA.question.substring(0, currentCharQ)}</span>{cursorVisible && state == QAndARendererState.doingQ ? '_' : ''}</p>
+            <p>{qAndA.answer.substring(0, currentCharA)}{active && cursorVisible && (state != QAndARendererState.doingQ && state != QAndARendererState.idle) ? '_' : ''}</p>
     </div>
   )
 }
@@ -107,10 +118,10 @@ type PromptProps = {
   qAndAs: Array<QAndA>,
 }
 const Prompt: React.FC<PromptProps> = ({ qAndAs }) => {
-  const [currentLine, setCurrentLine] = useState(0)
+  const [currentActive, setCurrentActive] = useState(0)
 
   const incrementCurrentLine = () => {
-    setCurrentLine((currentLine) => currentLine + 1)
+    setCurrentActive((currentLine) => Math.min(currentLine + 1, qAndAs.length - 1))
   }
 
   return (
@@ -118,7 +129,7 @@ const Prompt: React.FC<PromptProps> = ({ qAndAs }) => {
       {
         qAndAs.map((qAndA, i) => {
           return (
-            <QAndARenderer key={i} qAndA={qAndA} active={i <= currentLine} onDone={incrementCurrentLine} />
+            <QAndARenderer key={i} qAndA={qAndA} active={i == currentActive} onDone={incrementCurrentLine} />
           )
         })
       }
