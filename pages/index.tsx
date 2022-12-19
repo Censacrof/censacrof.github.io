@@ -10,7 +10,7 @@ export default function Home() {
         <Prompt qAndAs={[
           {
             question: `whoami`,
-            answer: `Hi, I'm Francesco Galisi. I'm an engineer. I solve problems`,
+            answer: `Hi, I'm Francesco Galisi. I'm an engineer. I solve problems.`,
           },
           {
             question: `locate social`,

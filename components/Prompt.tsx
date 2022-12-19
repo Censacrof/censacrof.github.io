@@ -72,9 +72,18 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
       return
     }
 
+    let millis = 10
+    if (currentCharA > 0) {
+      const c = qAndA.answer[currentCharA - 1]
+      if (c == ',')
+        millis = 250
+      else if (c == '.')
+        millis = 500
+    }
+    
     const timeOut = setTimeout(() => {
       setCurrentCharA(currentCharA => Math.min(currentCharA + 1, qAndA.answer.length))
-    }, 10)
+    }, millis)
 
     return () => clearTimeout(timeOut)
   }, [state, currentCharA])
