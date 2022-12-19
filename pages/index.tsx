@@ -7,7 +7,16 @@ export default function Home() {
     <div className="container mx-auto px-5 py-4">
       <div className='flex flex-col items-center'>
         <Header />
-        <Prompt text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil' />
+        <Prompt qAndAs={[
+          {
+            question: `whoami`,
+            answer: `Hi, I'm Francesco Galisi. I'm an engineer. I solve problems`,
+          },
+          {
+            question: `locate social`,
+            answer: `You can find me on {insert links here}`,
+          },
+        ]} />
       </div>
       <ScrollButton />
     </div>

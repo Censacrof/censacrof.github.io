@@ -11,8 +11,9 @@ module.exports = {
     colors: {
       'background': '#101214',
       'primary': '#426E78',
+      'primary-variant': '#D9553C',
       'secondary': '#404040',
-      'surface': '#f3f3e8',
+      'surface': '#F3F3e8',
     },
     fontFamily: {
       'sans': monda, // overwrite default font
