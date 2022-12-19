@@ -114,14 +114,17 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
     setCursorVisible(true)
   }, [currentCharQ, currentCharA])
 
+
+  const linesInA = qAndA.answer.substring(0, currentCharA).split('\n');
+
   return (
     <div className="text-surface gap-2">
-            <p><span className="font-bold">{active || state != QAndARendererState.idle ? '> ' : ''}</span><span className="text-primary-variant">{qAndA.question.substring(0, currentCharQ)}</span>{cursorVisible && state == QAndARendererState.doingQ ? '_' : ''}</p>
-            {
-              qAndA.answer.substring(0, currentCharA).split('\n').map((answer, i) => (
-                <p key={i}>{answer}{active && cursorVisible && (state != QAndARendererState.doingQ && state != QAndARendererState.idle) ? '_' : ''}</p>
-              ))
-            }
+      <p><span className="font-bold">{active || state != QAndARendererState.idle ? '> ' : ''}</span><span className="text-primary-variant">{qAndA.question.substring(0, currentCharQ)}</span>{cursorVisible && state == QAndARendererState.doingQ ? '_' : ''}</p>
+      {
+        linesInA.map((answer, i) => (
+          <p key={i}>{answer}{active && cursorVisible && (i == linesInA.length - 1 && state != QAndARendererState.doingQ && state != QAndARendererState.idle) ? '_' : ''}</p>
+        ))
+      }
     </div>
   )
 }

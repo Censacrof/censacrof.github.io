@@ -13,8 +13,10 @@ export default function Home() {
             answer: `Hi, I'm Francesco Galisi. I'm an engineer.\nI solve problems`,
           },
           {
-            question: `locate social`,
-            answer: `You can find me on {insert links here}`,
+            question: `cat contacts.txt`,
+            answer: `m +39 3393688907`
+                + `\nl Linkedin`
+                + `\ng GitHub`,
           },
         ]} />
       </div>
