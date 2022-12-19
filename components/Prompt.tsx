@@ -117,7 +117,11 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
   return (
     <div className="text-surface gap-2">
             <p><span className="font-bold">{active || state != QAndARendererState.idle ? '> ' : ''}</span><span className="text-primary-variant">{qAndA.question.substring(0, currentCharQ)}</span>{cursorVisible && state == QAndARendererState.doingQ ? '_' : ''}</p>
-            <p>{qAndA.answer.substring(0, currentCharA)}{active && cursorVisible && (state != QAndARendererState.doingQ && state != QAndARendererState.idle) ? '_' : ''}</p>
+            {
+              qAndA.answer.substring(0, currentCharA).split('\n').map((answer, i) => (
+                <p key={i}>{answer}{active && cursorVisible && (state != QAndARendererState.doingQ && state != QAndARendererState.idle) ? '_' : ''}</p>
+              ))
+            }
     </div>
   )
 }
