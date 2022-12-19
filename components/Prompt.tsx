@@ -45,7 +45,7 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
 
     const timeOut = setTimeout(() => {
       setCurrentCharQ(currentCharQ => Math.min(currentCharQ + 1, qAndA.question.length))
-    }, 30)
+    }, 60)
 
     return () => clearTimeout(timeOut)
   }, [state, currentCharQ])
@@ -74,7 +74,7 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
 
     const timeOut = setTimeout(() => {
       setCurrentCharA(currentCharA => Math.min(currentCharA + 1, qAndA.answer.length))
-    }, 30)
+    }, 10)
 
     return () => clearTimeout(timeOut)
   }, [state, currentCharA])
