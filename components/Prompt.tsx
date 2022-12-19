@@ -110,7 +110,7 @@ const Prompt: React.FC<PromptProps> = ({ qAndAs }) => {
   const [currentLine, setCurrentLine] = useState(0)
 
   const incrementCurrentLine = () => {
-    setCurrentLine((currentLine) => currentLine = 1)
+    setCurrentLine((currentLine) => currentLine + 1)
   }
 
   return (
