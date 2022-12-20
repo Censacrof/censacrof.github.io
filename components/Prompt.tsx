@@ -13,7 +13,7 @@ enum QAndARendererState {
 type QAndARendererProps = {
   qAndA: QAndA,
   active: boolean,
-  onDone: () => void,
+  onDone?: () => void,
 }
 const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) => {
   const [state, setState] = useState(QAndARendererState.idle)
@@ -93,7 +93,8 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
     if (!active || state != QAndARendererState.done)
       return
     
-    onDone()
+    if (onDone != null)
+      onDone()
   }, [state])
 
   // blinking cursor effect
@@ -132,12 +133,14 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
 
 type PromptProps = {
   qAndAs: Array<QAndA>,
+  active: boolean,
+  onDone?: () => void,
 }
-const Prompt: React.FC<PromptProps> = ({ qAndAs }) => {
-  const [currentActive, setCurrentActive] = useState(0)
+const Prompt: React.FC<PromptProps> = ({ qAndAs, active, onDone }) => {
+  const [currentActiveQAndA, setCurrentActiveQAndA] = useState(0)
 
   const incrementCurrentLine = () => {
-    setCurrentActive((currentLine) => Math.min(currentLine + 1, qAndAs.length - 1))
+    setCurrentActiveQAndA((currentLine) => Math.min(currentLine + 1, qAndAs.length - 1))
   }
 
   return (
@@ -145,7 +148,11 @@ const Prompt: React.FC<PromptProps> = ({ qAndAs }) => {
       {
         qAndAs.map((qAndA, i) => {
           return (
-            <QAndARenderer key={i} qAndA={qAndA} active={i == currentActive} onDone={incrementCurrentLine} />
+            <QAndARenderer key={i} qAndA={qAndA} active={active && (i == currentActiveQAndA)} 
+              onDone={i < qAndAs.length - 1 ? incrementCurrentLine : () => {
+                if (onDone)
+                  onDone()
+              }} />
           )
         })
       }
