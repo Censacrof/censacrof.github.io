@@ -12,7 +12,7 @@ type ContactsEntryProps = {
   text: string,
 }
 const ContactsEntry: React.FC<ContactsEntryProps> = ({ href, icon, text }) => {
-  return <a target={'_blank'} href={href}><span>|- <FontAwesomeIcon icon={icon} /> <span className='underline'>{text}</span></span></a>
+  return <a rel='noreferrer' target='_blank' href={href}><span>|- <FontAwesomeIcon icon={icon} /> <span className='underline'>{text}</span></span></a>
 }
 
 export default function Home() {
