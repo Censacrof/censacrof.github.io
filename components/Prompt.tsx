@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 
-type QAndA = {question: string, answer: string}
+type QAndA = {
+  question: string,
+  answer: string | Array<JSX.Element>,
+}
 
 enum QAndARendererState {
   idle,
@@ -73,14 +76,18 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
     }
 
     let millis = 10
-    if (currentCharA > 0) {
-      const c = qAndA.answer[currentCharA - 1]
-      if (c == ',')
-        millis = 250
-      else if (c == '.')
-        millis = 500
+    if (typeof qAndA.answer === 'string'){
+      if (currentCharA > 0) {
+        const c = qAndA.answer[currentCharA - 1]
+        if (c == ',')
+          millis = 250
+        else if (c == '.')
+          millis = 500
+      }
+    } else {
+      millis = 60
     }
-    
+
     const timeOut = setTimeout(() => {
       setCurrentCharA(currentCharA => Math.min(currentCharA + 1, qAndA.answer.length))
     }, millis)
@@ -115,8 +122,12 @@ const QAndARenderer: React.FC<QAndARendererProps> = ({ qAndA, active, onDone }) 
     setCursorVisible(true)
   }, [currentCharQ, currentCharA])
 
-
-  const linesInA = qAndA.answer.substring(0, currentCharA).split('\n');
+  let linesInA;  
+  if (typeof qAndA.answer === 'string') {
+    linesInA = (qAndA.answer as string).substring(0, currentCharA).split('\n');
+  } else {
+    linesInA = qAndA.answer.slice(0, currentCharA)
+  }
 
   return (
     <div className="font-chivo-mono text-surface gap-2">

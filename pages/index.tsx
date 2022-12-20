@@ -1,3 +1,6 @@
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faAt, faEnvelope, faMobile } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Header from '../components/Header'
 import Prompt from '../components/Prompt'
 import ScrollButton from '../components/ScrollButton'
@@ -14,9 +17,12 @@ export default function Home() {
           },
           {
             question: `cat contacts.txt`,
-            answer: `m +39 3393688907`
-                + `\nl Linkedin`
-                + `\ng GitHub`,
+            answer: [
+              <a target={'_blank'} href='https://www.linkedin.com/in/francesco-galisi/'><span><FontAwesomeIcon icon={ faLinkedin } /> GitHub</span></a>,
+              <a target={'_blank'} href='https://github.com/Censacrof'><span><FontAwesomeIcon icon={ faGithub } /> GitHub</span></a>,
+              <a target={'_blank'} href='mailto:galisifrancesco@gmail.com'><span><FontAwesomeIcon icon={ faEnvelope } /> galisifrancesco@gmail.com</span></a>,
+              <a target={'_blank'} href='tel:+393393688907'><span><FontAwesomeIcon icon={ faMobile } /> +39 3393688907</span></a>,
+            ],
           },
         ]} />
       </div>
