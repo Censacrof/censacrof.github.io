@@ -1,9 +1,19 @@
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
-import { faAt, faEnvelope, faMobile } from '@fortawesome/free-solid-svg-icons'
+import { faAt, faEnvelope, faMobile, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
 import Header from '../components/Header'
 import Prompt from '../components/Prompt'
 import ScrollButton from '../components/ScrollButton'
+
+type ContactsEntryProps = {
+  href: string,
+  icon: IconDefinition,
+  text: string,
+}
+const ContactsEntry: React.FC<ContactsEntryProps> = ({ href, icon, text }) => {
+  return <a target={'_blank'} href={href}><span>|- <FontAwesomeIcon icon={icon} /> <span className='underline'>{text}</span></span></a>
+}
 
 export default function Home() {
   return (
@@ -18,10 +28,10 @@ export default function Home() {
           {
             question: `cat contacts.txt`,
             answer: [
-              <a target={'_blank'} href='https://www.linkedin.com/in/francesco-galisi/'><span><FontAwesomeIcon icon={ faLinkedin } /> GitHub</span></a>,
-              <a target={'_blank'} href='https://github.com/Censacrof'><span><FontAwesomeIcon icon={ faGithub } /> GitHub</span></a>,
-              <a target={'_blank'} href='mailto:galisifrancesco@gmail.com'><span><FontAwesomeIcon icon={ faEnvelope } /> galisifrancesco@gmail.com</span></a>,
-              <a target={'_blank'} href='tel:+393393688907'><span><FontAwesomeIcon icon={ faMobile } /> +39 3393688907</span></a>,
+              <ContactsEntry href='https://www.linkedin.com/in/francesco-galisi/' icon={faLinkedin} text='Linkedin' />,
+              <ContactsEntry href='https://github.com/Censacrof' icon={faGithub} text='GitHub' />,
+              <ContactsEntry href='mailto:galisifrancesco@gmail.com' icon={faEnvelope} text='galisifrancesco@gmail.com' />,
+              <ContactsEntry href='tel:+393393688907' icon={faMobile} text='+39 3393688907' />,
             ],
           },
         ]} />
