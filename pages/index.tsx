@@ -28,10 +28,10 @@ export default function Home() {
           {
             question: `cat contacts.txt`,
             answer: [
-              <ContactsEntry href='https://www.linkedin.com/in/francesco-galisi/' icon={faLinkedin} text='Linkedin' />,
-              <ContactsEntry href='https://github.com/Censacrof' icon={faGithub} text='GitHub' />,
-              <ContactsEntry href='mailto:galisifrancesco@gmail.com' icon={faEnvelope} text='galisifrancesco@gmail.com' />,
-              <ContactsEntry href='tel:+393393688907' icon={faMobile} text='+39 3393688907' />,
+              <ContactsEntry key='Linkedin' href='https://www.linkedin.com/in/francesco-galisi/' icon={faLinkedin} text='Linkedin' />,
+              <ContactsEntry key='GitHub' href='https://github.com/Censacrof' icon={faGithub} text='GitHub' />,
+              <ContactsEntry key='email' href='mailto:galisifrancesco@gmail.com' icon={faEnvelope} text='galisifrancesco@gmail.com' />,
+              <ContactsEntry key='phone' href='tel:+393393688907' icon={faMobile} text='+39 3393688907' />,
             ],
           },
         ]} />
