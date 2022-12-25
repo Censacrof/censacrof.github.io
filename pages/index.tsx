@@ -37,7 +37,7 @@ export default function Home() {
           },
         ]} />
       </div>
-      <ScrollProgressIndicator />
+      <ScrollProgressIndicator checkpoints={ ['a', 'b', 'c', 'd', 'e'] } />
       <ScrollButton />
     </div>
   )
