@@ -5,6 +5,7 @@ import React from 'react'
 import Header from '../components/Header'
 import Prompt from '../components/Prompt'
 import ScrollButton from '../components/ScrollButton'
+import ScrollProgressIndicator from '../components/ScrollProgressIndicator'
 
 type ContactsEntryProps = {
   href: string,
@@ -36,6 +37,7 @@ export default function Home() {
           },
         ]} />
       </div>
+      <ScrollProgressIndicator />
       <ScrollButton />
     </div>
   )
