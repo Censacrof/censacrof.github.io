@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react"
+import { RefObject, useState } from "react"
 
 
 type ScrollProgressIndicatorpProps = {
-  checkpoints: Array<String>
+  checkpoints: Array<RefObject<HTMLDivElement>>
 }
 const ScrollProgressIndicator: React.FC<ScrollProgressIndicatorpProps> = ({ checkpoints }) => {
   const [currentCheckpoint, setCurrentCheckpoint] = useState(0)
@@ -14,6 +14,12 @@ const ScrollProgressIndicator: React.FC<ScrollProgressIndicatorpProps> = ({ chec
           <div key={i} className={`${i == currentCheckpoint ? 'bg-primary scale-125' : 'bg-surface rounded-[50%]'} transition-all duration-200 ease-in w-4 h-4 transform rotate-45 tran`}
             onClick={(event) => {
               setCurrentCheckpoint(i)
+
+              if (checkpoints[i] == null || checkpoints[i].current == null) {
+                return
+              }
+
+              const element = checkpoints[i].current!.scrollIntoView(true)
             }} ></div>
         ))
         }
