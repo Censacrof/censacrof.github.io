@@ -10,16 +10,16 @@ const ScrollProgressIndicator: React.FC<ScrollProgressIndicatorpProps> = ({ chec
 
   useEffect(() => {
     const onScroll = () => {
-      const currentInFocus = [...checkpoints]
+      const scrolledPast = [...checkpoints]
         .filter((checkpoint) => {
           const current = checkpoint.current
           if (current == null)
-            return
-          return window.pageYOffset <= (current.offsetTop + current.offsetHeight)
+            return false
+          return window.pageYOffset > (current.offsetTop + current.offsetHeight)
         })
         .sort((a, b) => a.current!.offsetTop - b.current!.offsetTop)
 
-      const i = Math.max(0, checkpoints.length - currentInFocus.length)
+      const i = Math.max(0, scrolledPast.length)
       setCurrentCheckpoint(i)
     }
 
