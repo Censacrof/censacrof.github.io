@@ -1,5 +1,5 @@
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
-import { faAt, faEnvelope, faMobile, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useRef } from 'react'
 import Header from '../components/Header'
@@ -40,7 +40,6 @@ export default function Home() {
                 <ContactsEntry key='Linkedin' href='https://www.linkedin.com/in/francesco-galisi/' icon={faLinkedin} text='Linkedin' />,
                 <ContactsEntry key='GitHub' href='https://github.com/Censacrof' icon={faGithub} text='GitHub' />,
                 <ContactsEntry key='email' href='mailto:galisifrancesco@gmail.com' icon={faEnvelope} text='galisifrancesco@gmail.com' />,
-                <ContactsEntry key='phone' href='tel:+393393688907' icon={faMobile} text='+39 3393688907' />,
               ],
             },
           ]} />
