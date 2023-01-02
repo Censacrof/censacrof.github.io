@@ -1,3 +1,4 @@
+import mitt from "next/dist/shared/lib/mitt"
 import { RefObject, useEffect, useState } from "react"
 
 
@@ -11,18 +12,32 @@ const ScrollProgressIndicator: React.FC<ScrollProgressIndicatorpProps> = ({ chec
     const onScroll = () => {
       const currentInFocus = [...checkpoints]
         .filter((checkpoint) => {
-          const current = checkpoint.current!
+          const current = checkpoint.current
+          if (current == null)
+            return
           return window.pageYOffset <= (current.offsetTop + current.offsetHeight)
         })
         .sort((a, b) => a.current!.offsetTop - b.current!.offsetTop)
 
-      console.log(currentInFocus)
       const i = Math.max(0, checkpoints.length - currentInFocus.length)
       setCurrentCheckpoint(i)
     }
 
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    const options: IntersectionObserverInit = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0,
+    }
+
+    const observer = new IntersectionObserver(onScroll, options)
+
+    checkpoints.forEach((checkpoint) => {
+      if (checkpoint.current == null)
+        return      
+      observer.observe(checkpoint.current)
+    })
+
+    return () => observer.disconnect()
   }, [checkpoints])
 
   return (
