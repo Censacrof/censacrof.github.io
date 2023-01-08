@@ -9,7 +9,6 @@ const Header = () => {
             src='https://github.com/Censacrof.png'
             alt='Profile picture'
             fill
-            className='w-full'
           />
         </div>
       </div>
